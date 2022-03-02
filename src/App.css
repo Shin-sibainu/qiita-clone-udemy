@@ -182,10 +182,11 @@ textarea {
 
 .deletePost button {
   border: none;
-
-  background: none;
-  font-size: 30px;
+  font-size: 20px;
   cursor: pointer;
+  border-radius: 6px;
+  box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.04), 0 1px 1px rgba(0, 0, 0, 0.25);
+  padding: 5px 15px;
 }
 
 .post .postTextContainer {

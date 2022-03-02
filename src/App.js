@@ -9,13 +9,14 @@ import { auth } from "./firebaseConfig";
 
 function App() {
   //認証しているのかどうかの判定(useContextで実装しても良い)
-  const [isAuth, setIsAuth] = useState(false);
+  const [isAuth, setIsAuth] = useState(localStorage.getItem("isAuth"));
 
   const signUserOut = () => {
-    localStorage.clear();
-    setIsAuth(false);
-    signOut(auth);
-    window.location.pathname = "/login";
+    signOut(auth).then(() => {
+      localStorage.clear();
+      setIsAuth(false);
+      window.location.pathname = "/login";
+    });
   };
 
   return (
