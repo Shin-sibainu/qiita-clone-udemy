@@ -3,13 +3,13 @@ import React from "react";
 import { auth, provider } from "../firebaseConfig";
 import { useNavigate } from "react-router-dom";
 
-function Login({ setIsAuth }) {
+function Login() {
   let navigate = useNavigate();
   const signInWithGoogle = () => {
-    signInWithPopup(auth, provider).then((result) => {
-      localStorage.setItem("isAuth", true);
+    signInWithPopup(auth, provider).then(() => {
+      // localStorage.setItem("isAuth", true);
       //ログインしたことを確認
-      setIsAuth(true);
+      // setIsAuth(true);
       navigate("/");
     });
   };

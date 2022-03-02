@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { db } from "../firebaseConfig";
 import { auth } from "../firebaseConfig";
 
-function Home({ isAuth }) {
+function Home({ user }) {
   const [postLists, setPostList] = useState([]);
 
   const deletePost = async (id) => {
@@ -16,10 +16,11 @@ function Home({ isAuth }) {
     const getPosts = async () => {
       const postsCollectionRef = collection(db, "posts");
       const data = await getDocs(postsCollectionRef);
-      setPostList(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+      setPostList(data.docs.map((doc) => ({ ...doc.data(), id: doc.id }))); //ここでpostListsが変わるから、第二引数に割り当てると無限ループになる。
     };
     getPosts();
-  }, [postLists]);
+    console.log("a");
+  }, []);
 
   return (
     <div className="homePage">
@@ -30,7 +31,7 @@ function Home({ isAuth }) {
               <h1>{post.title}</h1>
             </div>
             <div className="deletePost">
-              {isAuth && post.author.id === auth.currentUser.uid && (
+              {user && post.author.id === auth.currentUser.uid && (
                 <button
                   onClick={() => {
                     deletePost(post.id);

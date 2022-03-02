@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { auth, db } from "../firebaseConfig";
 import { useNavigate } from "react-router-dom";
 
-function CreatePost({ isAuth }) {
+function CreatePost({ user }) {
   const [inputTitle, setInputTitle] = useState("");
   const [inputPostText, setInputPostText] = useState("");
 
@@ -24,7 +24,7 @@ function CreatePost({ isAuth }) {
 
   useEffect(() => {
     //投稿ページに行っても、ログインしてなければログインページにリダイレクトさせる。
-    if (!isAuth) {
+    if (!user) {
       navigate("/login");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
