@@ -4,9 +4,10 @@ import Home from "./pages/Home";
 import CreatePost from "./pages/CreatePost";
 import Login from "./pages/Login";
 // import { useState } from "react";
-import { auth } from "./firebaseConfig";
+import { auth } from "./lib/firebaseConfig";
 import { useAuthState } from "react-firebase-hooks/auth";
 import Header from "./components/headers/Header";
+import Post from "./pages/Post";
 
 function App() {
   //認証しているのかどうかの判定(useContextで実装しても良い)
@@ -18,8 +19,9 @@ function App() {
       <Header user={user} />
       <Routes>
         <Route path="/" element={<Home user={user} />} />
-        <Route path="/createpost" element={<CreatePost user={user} />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/createpost" element={<CreatePost user={user} />} />
+        <Route path="/post/:username/:uid" element={<Post />} />
       </Routes>
     </Router>
   );

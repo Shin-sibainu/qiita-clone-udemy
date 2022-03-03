@@ -1,7 +1,9 @@
 import { collection, getDocs, doc, deleteDoc } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
-import { db } from "../firebaseConfig";
-import { auth } from "../firebaseConfig";
+import Tag from "../components/home/Tag";
+import Timeline from "../components/home/Timeline";
+import { db } from "../lib/firebaseConfig";
+// import { auth } from "../firebaseConfig";
 
 function Home({ user }) {
   const [postLists, setPostList] = useState([]);
@@ -33,28 +35,8 @@ function Home({ user }) {
 
   return (
     <div className="homePage">
-      {postLists.map((post) => (
-        <div className="post" key={post.id}>
-          <div className="postHeader">
-            <div className="title">
-              <h1>{post.title}</h1>
-            </div>
-            <div className="deletePost">
-              {user && post.author.id === auth.currentUser.uid && (
-                <button
-                  onClick={() => {
-                    deletePost(post.id);
-                  }}
-                >
-                  削除
-                </button>
-              )}
-            </div>
-          </div>
-          <div className="postTextContainer">{post.postText}</div>
-          <h3>@ {post.author.name}</h3>
-        </div>
-      ))}
+      <Tag />
+      <Timeline postLists={postLists} user={user} deletePost={deletePost} />
     </div>
   );
 }

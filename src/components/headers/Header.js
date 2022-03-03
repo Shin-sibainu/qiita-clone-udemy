@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { signOut } from "firebase/auth";
-import { auth } from "../../firebaseConfig";
+import { auth } from "../../lib/firebaseConfig";
 
 function Header({ user }) {
   const signUserOut = () => {

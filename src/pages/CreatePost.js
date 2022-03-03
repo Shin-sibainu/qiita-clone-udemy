@@ -1,6 +1,6 @@
 import { addDoc, collection } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
-import { auth, db } from "../firebaseConfig";
+import { auth, db } from "../lib/firebaseConfig";
 import { useNavigate } from "react-router-dom";
 
 function CreatePost({ user }) {
@@ -14,6 +14,7 @@ function CreatePost({ user }) {
     addDoc(postsCollectionRef, {
       author: {
         name: auth.currentUser.displayName,
+        photoURL: auth.currentUser.photoURL,
         id: auth.currentUser.uid,
       },
       title: inputTitle,
