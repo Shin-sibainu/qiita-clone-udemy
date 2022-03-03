@@ -9,6 +9,15 @@ function Home({ user }) {
   const deletePost = async (id) => {
     const postDoc = doc(db, "posts", id);
     await deleteDoc(postDoc);
+
+    //削除した後にデータ取得
+    const getPosts = async () => {
+      const postsCollectionRef = collection(db, "posts");
+      const data = await getDocs(postsCollectionRef);
+      setPostList(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    };
+    getPosts();
+    console.log("a");
   };
 
   useEffect(() => {
